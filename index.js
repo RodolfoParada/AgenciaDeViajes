@@ -50,7 +50,7 @@ app.use(express.urlencoded({exytended: true}));
 app.use('/', router); 
 
 
-app.listen(port,() =>{
+app.listen(process.env.PORT ||  4000, () =>{
     console.log(`El servidor esta funcionando en el puerto ${port}`);
 });
 
