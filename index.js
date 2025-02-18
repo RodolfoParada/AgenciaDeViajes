@@ -1,5 +1,6 @@
 //const express = require('express');
 import express from 'express';
+import helmet from 'helmet';
 import router from './routes/index.js';
 import db from './config/db.js'; 
 
@@ -37,6 +38,23 @@ app.use(express.urlencoded({exytended: true}));
 app.use('/', router); 
 
 
+
+
+// Configura la CSP para permitir recursos de Google
+app.use(
+    helmet.contentSecurityPolicy({
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["'self'", 'https://www.gstatic.com'],
+        scriptSrc: ["'self'", 'https://www.gstatic.com'],
+        imgSrc: ["'self'", 'data:', 'https://www.gstatic.com'],
+      },
+    })
+  );
+
+
 app.listen(port,() =>{
     console.log(`El servidor esta funcionando en el puerto ${port}`);
-})
+});
+
+  
