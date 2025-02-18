@@ -17,6 +17,18 @@ db.authenticate()
 // Definir puerto en local  
 const port = process.env.PORT || 4000;
 
+// Configura la CSP para permitir recursos de Google
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", 'https://www.gstatic.com'],
+      scriptSrc: ["'self'", 'https://www.gstatic.com'],
+      imgSrc: ["'self'", 'data:', 'https://www.gstatic.com'],
+    },
+  })
+);
+
 //Habilitar PUG
 app.set('view engine','pug');
 
@@ -36,21 +48,6 @@ app.use(express.urlencoded({exytended: true}));
 
 //Agregar Router
 app.use('/', router); 
-
-
-
-
-// Configura la CSP para permitir recursos de Google
-app.use(
-    helmet.contentSecurityPolicy({
-      directives: {
-        defaultSrc: ["'self'"],
-        styleSrc: ["'self'", 'https://www.gstatic.com'],
-        scriptSrc: ["'self'", 'https://www.gstatic.com'],
-        imgSrc: ["'self'", 'data:', 'https://www.gstatic.com'],
-      },
-    })
-  );
 
 
 app.listen(port,() =>{
