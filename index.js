@@ -20,8 +20,8 @@ app.use(
     directives: {
       defaultSrc: ["'self'"],
       styleSrc: ["'self'", 'https://www.gstatic.com'],
-      scriptSrc: ["'self'", 'https://www.gstatic.com'],
-      imgSrc: ["'self'", 'data:', 'https://www.gstatic.com'],
+      scriptSrc: ["'self'", ],
+      imgSrc: ["'self'", 'data:'],
     },
   })
 );
