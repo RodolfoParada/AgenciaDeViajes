@@ -1,40 +1,96 @@
-extends ./layout/index 
+//- Extiende el layout principal
+extends ./layout/index
 
-block slider 
-    .slider  
+//- Bloque para el slider
+block slider
+    .slider
         h1 Rio de Janeiro
         em aventura
 
+//- Bloque para el contenido principal
 block contenido
     main.container.mt-5
+        //- Sección "Sobre Nosotros"
         h2.text-center.mb-5 Sobre Nosotros
         .row.mb-5
             .col-md-6
-                p 
-                    | Vel galisum necessitatibus At culpa repudiandae ex amet beatae 
-                    | in numquam quisquam rem molestiae facere ut dolores possimus? 
-                    | Hic fugit sunt ut quia ipsum nam voluptates placeat id officia 
+                p
+                    | Vel galisum necessitatibus At culpa repudiandae ex amet beatae
+                    | in numquam quisquam rem molestiae facere ut dolores possimus?
+                    | Hic fugit sunt ut quia ipsum nam voluptates placeat id officia
                     | quasi et repellat distinctio.
-                
-                p 
-                    | Et Quis alias ea quisquam autem et magnam vitae ut porro quia. 
-                    | Cum suscipit fuga sit ullam rerum aut quae excepturi et fugit corrupti. 
-                    | Sit nesciunt possimus qui quaerat nihil et deleniti animi qui quidem impedit?  
-            
-            .col-md-6   
+                p
+                    | Et Quis alias ea quisquam autem et magnam vitae ut porro quia.
+                    | Cum suscipit fuga sit ullam rerum aut quae excepturi et fugit corrupti.
+                    | Sit nesciunt possimus qui quaerat nihil et deleniti animi qui quidem impedit?
+            .col-md-6
                 img(src="/img/inicio_nosotros.jpg", alt="imagen nosotros")
-        
-        include ./layout/bloque_viajes
-    .descuento 
-        .container 
-            .row 
-                .col-md-6  
-                    .contenido
-                         h3 5% de Descuento
-                         p.titulo Viaje a Canada
-                         p.fecha 20 de Marzo de 2025 - 28 de Marzo de 2025
-                         p.precio $2,500 USD        
 
+        //- Sección de "Próximos Viajes"
+        h2.text-center.mb-5 Próximos Viajes
+        .row.proximos-viajes
+            each viaje in viajes
+                .col-md-6.col-lg-4.mb-4
+                    .card
+                        img.card-img-top(src=`img/destinos_${viaje.imagen_url}.jpg`, alt=`Imagen de ${viaje.titulo}`)
+                        .card-body
+                            h2= viaje.titulo
+                            p
+                                svg(
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    viewbox='0 0 24 24'
+                                    fill='none'
+                                    stroke='currentColor'
+                                    stroke-linecap='round'
+                                    stroke-linejoin='round'
+                                    width='24'
+                                    height='24'
+                                    stroke-width='2'
+                                )
+                                    path(d='M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z')
+                                    path(d='M16 3v4')
+                                    path(d='M8 3v4')
+                                    path(d='M4 11h16')
+                                    path(d='M7 14h.013')
+                                    path(d='M10.01 14h.005')
+                                    path(d='M13.01 14h.005')
+                                    path(d='M16.015 14h.005')
+                                    path(d='M13.015 17h.005')
+                                    path(d='M7.01 17h.005')
+                                    path(d='M10.01 17h.005')
+                                | #{viaje.fecha_ida} - #{viaje.fecha_vuelta}
+                            p
+                                svg(
+                                    xmlns='http://www.w3.org/2000/svg'
+                                    viewbox='0 0 24 24'
+                                    fill='none'
+                                    stroke='currentColor'
+                                    stroke-linecap='round'
+                                    stroke-linejoin='round'
+                                    width='24'
+                                    height='24'
+                                    stroke-width='2'
+                                )
+                                    path(d='M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0')
+                                    path(d='M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2')
+                                    path(d='M16 3.13a4 4 0 0 1 0 7.75')
+                                    path(d='M21 21v-2a4 4 0 0 0 -3 -3.85')
+                                | #{viaje.disponibles} Disponibles
+                            p= viaje.descripcion.substr(0, 100) + '...'
+                            a(href=`/viajes/${viaje.slug}`, class="btn btn-success btn-block") Más Información
+
+    //- Sección de descuento
+    .descuento
+        .container
+            .row
+                .col-md-6
+                    .contenido
+                        h3 5% de Descuento
+                        p.titulo Viaje a Canada
+                        p.fecha 20 de Marzo de 2025 - 28 de Marzo de 2025
+                        p.precio $2,500 USD
+    include ./layout/bloque_viajes
+
+    //- Sección de testimoniales
     .container
         h2.mt-5.text-center Testimoniales
-            

@@ -2,7 +2,7 @@
     each viaje in viajes 
         .col-md-6.col-lg-4.mb-4
             .card
-                img.card-img-top(src=`/img/destinos_${viaje.imagen_url}.jpg`)
+                img.card-img-top(src=`/img/destinos_${viaje.imagen_url}.jpg`, alt=`Imagen de ${viaje.titulo}`)
                 .card-body
                     h2= viaje.titulo
                     
@@ -29,7 +29,6 @@
                             path(d='M13.015 17h.005')
                             path(d='M7.01 17h.005')
                             path(d='M10.01 17h.005')
-
                         | #{viaje.fecha_ida} - #{viaje.fecha_vuelta}
 
                     p 
@@ -48,11 +47,8 @@
                             path(d='M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2')
                             path(d='M16 3.13a4 4 0 0 1 0 7.75')
                             path(d='M21 21v-2a4 4 0 0 0 -3 -3.85')
+                        | #{viaje.disponibles} Disponibles
 
-                        | #{viaje.disponibles}  Disponibles
-
-                    p= viaje.descripcion.substr(0,100) + '...'
+                    p= viaje.descripcion.substr(0, 100) + '...'
 
                     a(href=`/viajes/${viaje.slug}`, class="btn btn-success btn-block") Más Información
-
-
