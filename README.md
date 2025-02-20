@@ -8,8 +8,8 @@
 #### sequelize.org
 #### npm i dotenv // variables de entorno
 #### base de datos migrada gratis con filess.io
+#### puedes crear la tabla local 
 
-####puedes crear la tabla local 
 **use apunta a la base datos**
 ```
 use AgenciaDeViajes;
@@ -35,7 +35,7 @@ imagen_url VARCHAR(255) NOT NULL, -- URL de la imagen (mejor que VARBINARY)
 disponible INT NOT NULL, -- Número de plazas disponibles 
 slug VARCHAR(100) NOT NULL UNIQUE -- Identificador único en URL );
 ```
-**Insetta datos a la tabla viajes**
+**Inserta datos a la tabla viajes**
 ```
 INSERT INTO `viajes`(titulo, descripcion, precio, fecha_ida, fecha_vuelta, imagen_url, disponibles, slug) 
 VALUES 
