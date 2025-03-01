@@ -15,16 +15,31 @@ db.authenticate()
 const port = process.env.PORT || 4000;
 
 // Configura la CSP para permitir recursos de Google
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       styleSrc: ["'self'", 'https://www.gstatic.com'],
+//       scriptSrc: ["'self'", ],
+//       imgSrc: ["'self'", 'data:'],
+//     },
+//   })
+// );
+
 app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      styleSrc: ["'self'", 'https://www.gstatic.com'],
-      scriptSrc: ["'self'", ],
-      imgSrc: ["'self'", 'data:'],
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        styleSrc: ["'self'", "'unsafe-inline'", 'https://www.gstatic.com'],
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
+        imgSrc: ["'self'", 'data:', 'https://www.gstatic.com'],
+      },
     },
   })
 );
+
+
 
 //Habilitar PUG
 app.set('view engine','pug');
